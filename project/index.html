@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Reservation System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bus Reservation System</h1>
+
+        <!-- Bus Search Form -->
+        <div class="search-bar">
+            <h3>Search Buses</h3>
+            <form id="search-form">
+                <label for="name">Passenger Name (max 20 characters):</label>
+                <input type="text" id="name" name="name" required maxlength="20">
+
+                <label for="phone">Phone Number (max 10 characters):</label>
+                <input type="tel" id="phone" name="phone" required maxlength="10">
+
+                <label for="departure">Departure City:</label>
+                <select id="departure" name="departure" required>
+                    <option value="">Select Departure City</option>
+                    <option value="ben">Bengaluru</option>
+                    <option value="bho">Bhopal</option>
+                    <option value="hyd">Hyderabad</option>
+                    <option value="che">Chennai</option>
+                    <option value="vijay">Vijayawada</option>
+                </select>
+
+                <label for="destination">Destination City:</label>
+                <select id="destination" name="destination" required>
+                    <option value="">Select Destination City</option>
+                    <option value="hyd">Hyderabad</option>
+                    <option value="ind">Indore</option>
+                    <option value="ben">Bengaluru</option>
+                    <option value="ap">Andhra Pradesh</option>
+                </select>
+
+                <label for="date">Departure Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time" class="optional">Preferred Time (Optional):</label>
+                <input type="time" id="time" name="time">
+
+                <label for="class">Class:</label>
+                <select id="class" name="class" required>
+                    <option value="Ac Class">AC Class</option>
+                    <option value="Nonac Class">Non-AC Class</option>
+                </select>
+
+                <label for="price">Price Range (Optional):</label>
+                <input type="number" id="price" name="price" min="0">
+
+                <label for="seat-preference" class="optional">Seat Preference (Optional):</label>
+                <select id="seat-preference" name="seat-preference">
+                    <option value="old">Old people</option>
+                    <option value="window">Window</option>
+                    <option value="pregnant">Pregnant women</option>
+                </select>
+
+                <button type="submit">Search Buses</button>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results"></div>
+
+        <!-- Booking History -->
+        <div id="booking-history">
+            <h3>Booking History</h3>
+            <!-- History content will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Modal for seat selection and payment -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Select Seats and Make Payment</h3>
+            <div id="seat-map" class="seat-map">
+                <div class="bus">
+                    <div class="left-side">
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat pink" onclick="selectSeat(this)"></div>
+                            <div class="seat pink" onclick="selectSeat(this)"></div>
+                        </div>
+                    </div>
+                    <div class="right-side">
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                            <div class="seat" onclick="selectSeat(this)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat green" onclick="selectSeat(this)"></div>
+                            <div class="seat green" onclick="selectSeat(this)"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Details -->
+            <h4>Payment Details</h4>
+            <form id="payment-form">
+                <label for="card-number">Card Number (max 18 characters):</label>
+                <input type="text" id="card-number" name="card-number" required maxlength="18">
+
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="month" id="expiry-date" name="expiry-date" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" required maxlength="4">
+
+                <label for="card-holder">Card Holder Name:</label>
+                <input type="text" id="card-holder" name="card-holder" required>
+            </form>
+
+            <button id="confirm-booking">Confirm Booking</button>
+        </div>
+    </div>
+
+    <!-- Ticket Details Modal -->
+    <div id="ticket-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-ticket">&times;</span>
+            <div id="ticket-details"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>
